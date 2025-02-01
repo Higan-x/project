@@ -2,7 +2,7 @@
 
 using namespace std;
 string roll_no[30], firstname[30] ,surname[30], Major[30], courses[30][30] ;
-float course_q[30][30],grade[30][30],avg[30],course_num[30];
+float course_q[30][30],grade[30][30],avg[30],q[30],course_num[30];
 
 int total = 0;
 
@@ -66,11 +66,15 @@ void enter()
 				cin>>course_q[i][j];
 				cout<<"Enter the grade (more than 0 and less than 21): ";
 				cin>>grade[i][j];
+				avg[i]+=course_q[i][j] * grade[i][j];
+				q[i]+=course_q[i][j];
 				for (int i=0;i<50;i++,cout<<"#");
 				cout<<endl;
 			}
+			avg[i] = avg[i] / q[i];
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
+			
 		}
 	}
 	else
@@ -116,10 +120,12 @@ void enter()
 				cin>>course_q[i][j];
 				cout<<"Enter the grade (more than 0 and less than 21) : ";
 				cin>>grade[i][j];
+				avg[i]+=course_q[i][j] * grade[i][j];
+				q[i]+=course_q[i][j];
 				for (int i=0;i<50;i++,cout<<"#");
 				cout<<endl;
 			}
-			
+			avg[i] = avg[i] / q[i];
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 		}
@@ -130,7 +136,11 @@ void show()
 {
 	if (total == 0)
 	{
+		for(int k=0;k<50;k++,cout<<"-");
+		cout<<endl;
 		cout << "No Data is Entered" << endl;
+		for(int k=0;k<50;k++,cout<<"-");
+		cout<<endl;
 	}
 	else
 	{
@@ -142,6 +152,7 @@ void show()
 			cout << "Full Name :" << firstname[i] <<'\t'<<surname[i]<< endl;
 			cout << "Roll Number :" << roll_no[i] << endl;
 			cout << "Major :" << Major[i] << endl;
+			cout << "GPA :" << avg[i]<<endl;
 		}
 		for(int k=0;k<50;k++,cout<<"-");
 		cout<<endl;
@@ -151,7 +162,11 @@ void search()
 {
 	if (total == 0)
 	{
+		for(int k=0;k<50;k++,cout<<"-");
+		cout<<endl;
 		cout << "No data is entered" << endl;
+		for(int k=0;k<50;k++,cout<<"-");
+		cout<<endl;
 	}
 	else
 	{
@@ -169,11 +184,7 @@ void search()
 					cout << "Full Name :" << firstname[i] <<'\t'<<surname[i]<< endl;
 					cout << "Roll Number :" << roll_no[i] << endl;
 					cout << "Major :" << Major[i] << endl;
-					for(int j=0;j<course_num[i];j++)
-					{
-						cout<<j+1<<"st course"<<endl << "Name :"<<courses[i][j]<<'\t'<<"Quantity :"<<course_q[i][j]<<'\t'<<"Grade :"<<grade[i][j]<<endl;
-					}
-
+					cout << "GPA :" <<avg[i] <<endl;
 				}
 				else
 					cout<<"Student not found" <<endl;
@@ -184,6 +195,8 @@ void search()
 			cout<<"Please a number to continue";
 			goto flag3;
 		}
+		for(int k=0;k<50;k++,cout<<"-");
+		cout<<endl;
 	}
 }
 // void update()
