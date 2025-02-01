@@ -10,7 +10,7 @@ void enter()
 	int ch = 0;
 	cout << "How many students do u want to enter??" << endl;
 	cin >> ch;
-	if (total == 0)
+	if (total == 0) 
 	{
 		total = ch + total;
 		string roll_num;
