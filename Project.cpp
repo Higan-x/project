@@ -2,17 +2,19 @@
 
 using namespace std;
 string roll_no[30], firstname[30] ,surname[30], Major[30], courses[30][30] ;
-float course_q[30][30],grade[30][30],sum[30],course_num[30];
+float course_q[30][30],grade[30][30],avg[30],course_num[30];
 
 int total = 0;
 
 bool numcheck(string s)
 {
-	bool b = true;
-	for (int i=0;i<s.length();i++)
-		if( s[i] != 48 || s[i] != 49 ||s[i] != 50 ||s[i] != '3' ||s[i] != '4' ||s[i] != '5' ||s[i] != '6' ||s[i] != '7' || s[i] != '8' ||s[i] != '9')
-			b = false;
-	return b;
+	bool b=true;
+	for (char ch : s) {
+        if (!isdigit(ch)) {
+            b=false;
+        }
+    }
+    return b;
 }
 
 void enter()
@@ -31,7 +33,14 @@ void enter()
 			flag:
 			cout<<endl;
 			cout << "Enter Roll NO: " << endl;
-			cin>>roll_no[i] ;
+			cin>>roll_num;
+			if (numcheck(roll_num))
+				roll_no[i] = roll_num;
+			else
+			{
+				cout<<"Please enter a number to continue"<<endl;
+				goto flag;
+			}
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 			cout << "Enter FirstName: " << endl;
@@ -53,9 +62,9 @@ void enter()
 				cout<<j+1<<" st course :"<<endl;
 				cout<<"Enter the name of the course : ";
 				cin>>courses[i][j];
-				cout<<"Enter the quantity of this course : ";
+				cout<<"Enter the quantity of this course (number): ";
 				cin>>course_q[i][j];
-				cout<<"Enter the grade : ";
+				cout<<"Enter the grade (more than 0 and less than 21): ";
 				cin>>grade[i][j];
 				for (int i=0;i<50;i++,cout<<"#");
 				cout<<endl;
@@ -72,9 +81,17 @@ void enter()
 			cout << "\nEnter the Data of student number " << i + 1 <<":"<< endl;
 			for (int i=0;i<50;i++,cout<<"#");
 			flag2:
+			string roll_num;
 			cout<<endl;
 			cout << "Enter Roll NO: " << endl;
-			cin>>roll_no[i];
+			cin>>roll_num;
+			if (numcheck(roll_num))
+				roll_no[i] = roll_num;
+			else
+			{
+				cout<<"Please enter a number to continue"<<endl;
+				goto flag2;
+			}
 			cout<<endl;
 			cout << "Enter FirstName: " << endl;
 			cin >> firstname[i];
@@ -95,13 +112,14 @@ void enter()
 				cout<<j+1<<" st course :"<<endl;
 				cout<<"Enter the name of the course : ";
 				cin>>courses[i][j];
-				cout<<"Enter the quantity of this course : ";
+				cout<<"Enter the quantity of this course (number): ";
 				cin>>course_q[i][j];
-				cout<<"Enter the grade : ";
+				cout<<"Enter the grade (more than 0 and less than 21) : ";
 				cin>>grade[i][j];
 				for (int i=0;i<50;i++,cout<<"#");
 				cout<<endl;
 			}
+			
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 		}
@@ -121,41 +139,53 @@ void show()
 			for(int k=0;k<50;k++,cout<<"-");
 			cout<<endl;
 			cout << "\nData of Student " << i + 1 <<":"<< endl<<endl;
-			cout << "Roll Number :" << roll_no[i] << endl;
 			cout << "Full Name :" << firstname[i] <<'\t'<<surname[i]<< endl;
+			cout << "Roll Number :" << roll_no[i] << endl;
 			cout << "Major :" << Major[i] << endl;
-			for(int j=0;j<course_num[i];j++)
-			{
-				cout<<j+1<<"st course"<<endl << "Name :"<<courses[i][j]<<'\t'<<"Quantity :"<<course_q[i][j]<<'\t'<<"Grade :"<<grade[i][j]<<endl;
-			}
 		}
 		for(int k=0;k<50;k++,cout<<"-");
 		cout<<endl;
 	}
 }
-// void search()
-// {
-// 	if (total == 0)
-// 	{
-// 		cout << "No data is entered" << endl;
-// 	}
-// 	else
-// 	{
-// 		string rollno;
-// 		cout << "Enter the roll no of student" << endl;
-// 		cin >> rollno;
-// 		for (int i = 0; i < total; i++)
-// 		{
-// 			if (rollno == roll_no[i])
-// 			{
-// 				cout << "Roll NO " << roll_no[i] << endl;
-// 				cout << "Name " << name[i] << endl;
-// 				cout << "Major " << Major[i] << endl;
-// 				cout << "Course " << course[i] << endl;
-// 			}
-// 		}
-// 	}
-// }
+void search()
+{
+	if (total == 0)
+	{
+		cout << "No data is entered" << endl;
+	}
+	else
+	{
+		string rollno;
+		flag3:
+		cout << "Enter the roll no of student :";
+		cin >> rollno;
+		if (numcheck(rollno))
+		{
+			for(int i=0;i<total;i++)
+			{
+				if(roll_no[i] == rollno)
+				{
+					cout<<"Student found :"<<endl;
+					cout << "Full Name :" << firstname[i] <<'\t'<<surname[i]<< endl;
+					cout << "Roll Number :" << roll_no[i] << endl;
+					cout << "Major :" << Major[i] << endl;
+					for(int j=0;j<course_num[i];j++)
+					{
+						cout<<j+1<<"st course"<<endl << "Name :"<<courses[i][j]<<'\t'<<"Quantity :"<<course_q[i][j]<<'\t'<<"Grade :"<<grade[i][j]<<endl;
+					}
+
+				}
+				else
+					cout<<"Student not found" <<endl;
+			}
+		}
+		else
+		{
+			cout<<"Please a number to continue";
+			goto flag3;
+		}
+	}
+}
 // void update()
 // {
 // 	if (total == 0)
@@ -222,7 +252,7 @@ int main()
 	{
 		cout << "\nPress 1 to Enter data" << endl
 			 << endl;
-		cout << "Press 2 to Show data" << endl
+		cout << "Press 2 to Show and list data" << endl
 			 << endl;
 		cout << "Press 3 to Search data" << endl
 			 << endl;
