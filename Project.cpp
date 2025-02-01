@@ -144,15 +144,25 @@ void show()
 	}
 	else
 	{
+		string major;
+		cout<<'(';
+		for(int i=0;i<total;i++)
+			cout<<Major[i]<<'\t';
+		cout<<'\b'<<'\b'<<'\b'<<')';
+		cout<<endl;
+		cout<<"type which Major u want to list:"<<endl;
+		cin>>major;
 		for (int i = 0; i < total; i++)
 		{
 			for(int k=0;k<50;k++,cout<<"-");
+			if(Major[i] == major)
+			{
 			cout<<endl;
-			cout << "\nData of Student " << i + 1 <<":"<< endl<<endl;
 			cout << "Full Name :" << firstname[i] <<'\t'<<surname[i]<< endl;
 			cout << "Roll Number :" << roll_no[i] << endl;
 			cout << "Major :" << Major[i] << endl;
 			cout << "GPA :" << avg[i]<<endl;
+			}
 		}
 		for(int k=0;k<50;k++,cout<<"-");
 		cout<<endl;
@@ -284,9 +294,9 @@ int main()
 		case 2:
 			show();
 			break;
-		// case 3:
-		// 	search();
-		// 	break;
+		case 3:
+			search();
+			break;
 		// case 4:
 		// 	update();
 		// 	break;
@@ -297,7 +307,11 @@ int main()
 			exit(0);
 			break;
 		default:
+			for(int k=0;k<50;k++,cout<<"-");
+			cout<<endl;
 			cout << "Invalid input" << endl;
+			for(int k=0;k<50;k++,cout<<"-");
+			cout<<endl;
 			break;
 		}
 	}
