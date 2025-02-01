@@ -71,6 +71,7 @@ void enter()
 
 		{
 			cout << "\nEnter the Data of student number " << i + 1 <<":"<< endl;
+			for (int i=0;i<50;i++,cout<<"#");
 			flag2:
 			cout<<endl;
 			cout << "Enter Roll NO: " << endl;
