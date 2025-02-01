@@ -2,7 +2,7 @@
 
 using namespace std;
 string roll_no[30], firstname[30] ,surname[30], Major[30], courses[30][30] ;
-float course_q[30][30],grade[30][30],avg[30],q[30],course_num[30];
+float course_q[30][30],grade[30][30],avg[30],q[30],course_num[30],sum[30];
 
 int total = 0;
 
@@ -66,12 +66,12 @@ void enter()
 				cin>>course_q[i][j];
 				cout<<"Enter the grade (more than 0 and less than 21): ";
 				cin>>grade[i][j];
-				avg[i]+=course_q[i][j] * grade[i][j];
+				sum[i]+=course_q[i][j] * grade[i][j];
 				q[i]+=course_q[i][j];
 				for (int i=0;i<50;i++,cout<<"#");
 				cout<<endl;
 			}
-			avg[i] = avg[i] / q[i];
+			avg[i] = sum[i] / q[i];
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 			
@@ -120,12 +120,12 @@ void enter()
 				cin>>course_q[i][j];
 				cout<<"Enter the grade (more than 0 and less than 21) : ";
 				cin>>grade[i][j];
-				avg[i]+=course_q[i][j] * grade[i][j];
+				sum[i]+=course_q[i][j] * grade[i][j];
 				q[i]+=course_q[i][j];
 				for (int i=0;i<50;i++,cout<<"#");
 				cout<<endl;
 			}
-			avg[i] = avg[i] / q[i];
+			avg[i] = sum[i] / q[i];
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 		}
@@ -148,7 +148,7 @@ void show()
 		cout<<'(';
 		for(int i=0;i<total;i++)
 			cout<<Major[i]<<'\t';
-		cout<<'\b'<<'\b'<<'\b'<<')';
+		cout<<')';
 		cout<<endl;
 		cout<<"type which Major u want to list:"<<endl;
 		cin>>major;
@@ -233,6 +233,7 @@ void update()
 			if (rollno == roll_no[i])
 			{
 				int value;
+				string s;
 				cout<<"Which part you want to update? (1 ---> Name , 2 ---> Major , 3 ---> Courses )"<<endl;
 				cin>>value;
 				switch(value)
@@ -242,10 +243,38 @@ void update()
 					cin>>firstname[i];
 					cout<<"SurName :";
 					cin>>surname[i];
+					cout<<"Updated succesfully"<<endl;
 					break;
 					case 2:
+					cout<<"Enter the Major :"<<endl;
+					cin>>Major[i];
+					cout<<"Updated succesfully"<<endl;
 					break;
 					case 3:
+					for(int j=0;j<course_num[i];j++)
+						cout<<courses[i][j]<<'\t';
+					cout<<"Type the course u want to change: " <<endl;
+					cin>>s;
+					sum[i] =0;
+					q[i] =0;
+					for(int k=0;k<course_num[i];k++)
+						{
+							if(s == courses[i][k])
+							{
+								cout<<"Enter the name of the course : ";
+								cin>>courses[i][k];
+								cout<<"Enter the quantity of this course (number): ";
+								cin>>course_q[i][k];
+								cout<<"Enter the grade (more than 0 and less than 21): ";
+								cin>>grade[i][k];
+							}
+							else
+								cout<<"Course not found"<<endl;
+							sum[i]+=course_q[i][k] * grade[i][k];
+							q[i]+=course_q[i][k];
+						}
+					avg[i] = sum[i] / q[i];
+					cout<<"Updated succesfully"<<endl;
 					break;
 					default:
 					for(int k=0;k<50;k++,cout<<"-");
@@ -286,10 +315,49 @@ void update()
 // 		}
 // 	}
 // }
-// void report()
-// {
-
-// }
+void report()
+{
+	if (total == 0)
+	{
+		for(int k=0;k<50;k++,cout<<"-");
+		cout<<endl;
+		cout << "No Data is Entered" << endl;
+		for(int k=0;k<50;k++,cout<<"-");
+		cout<<endl;
+	}
+	else
+	{
+		string rollno;
+		flag4:
+		cout << "Enter the Roll No of student :";
+		cin >> rollno;
+		if (numcheck(rollno))
+		{
+			for(int i=0;i<total;i++)
+			{
+				if(roll_no[i] == rollno)
+				{
+					cout<<"Student found :"<<endl;
+					cout << "Full Name :" << firstname[i] <<'\t'<<surname[i]<< endl;
+					cout << "Roll Number :" << roll_no[i] << endl;
+					cout << "Major :" << Major[i] << endl <<"Courses :" <<endl;
+					for(int j=0; j<course_num[i];j++)
+						cout<<"Name :"<<courses[i][j]<<endl<<"Quantity :"<<course_q[i][j]<<endl<<"Grade :"<<grade[i][j]<<endl;
+					cout << "GPA :" <<avg[i] <<endl;
+				}
+				else
+					cout<<"Student not found" <<endl;
+			}
+		}
+		else
+		{
+			cout<<"Please a number to continue";
+			goto flag4;
+		}
+		for(int k=0;k<50;k++,cout<<"-");
+		cout<<endl;
+	}
+}
 int main()
 {
 	int value;
@@ -327,9 +395,9 @@ int main()
 		// case 5:
 		// 	Delete();
 		// 	break;
-		// case 6:
-		// 	report();
-		// 	break;
+		case 6:
+			report();
+			break;
 		case 7:
 			exit(0);
 			break;
