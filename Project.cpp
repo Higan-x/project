@@ -13,10 +13,13 @@ void enter()
 	if (total == 0)
 	{
 		total = ch + total;
+		string roll_num;
 		for (int i = 0; i < ch; i++)
 		{
 			cout << "\nEnter the Data of student " << i + 1 << endl
 				 << endl;  
+			for (int i=0;i<50;i++,cout<<"-");
+			cout<<endl;
 			cout << "Enter Roll NO: " << endl;
 			cin >> roll_no[i];
 			cout << "Enter Name: " << endl;
@@ -149,53 +152,45 @@ void Delete()
 }
 int main()
 {
-	string input;
-	// while (true)
-	// {
-	// 	cout << "\nPress 1 to Enter data" << endl
-	// 		 << endl;
-	// 	cout << "Press 2 to Show data" << endl
-	// 		 << endl;
-	// 	cout << "Press 3 to Search data" << endl
-	// 		 << endl;
-	// 	cout << "Press 4 to Update data" << endl
-	// 		 << endl;
-	// 	cout << "Press 5 to Delete data" << endl
-	// 		 << endl;
-	// 	cout << "Press 6 to Quit" << endl
-	// 		 << endl;
-	// 	cin >> value;
-	// 	switch (value)
-	// 	{
-	// 	case 1:
-	// 		enter();
-	// 		break;
-	// 	case 2:
-	// 		show();
-	// 		break;
-	// 	case 3:
-	// 		search();
-	// 		break;
-	// 	case 4:
-	// 		update();
-	// 		break;
-	// 	case 5:
-	// 		Delete();
-	// 		break;
-	// 	case 6:
-	// 		exit(0);
-	// 		break;
-	// 	default:
-	// 		cout << "Invalid input" << endl;
-	// 		break;
-	// 	}
-	// }
-	cin >> input;
-	stringstream s(input);
-    int intValue;
-    if (s >> intValue ) {
-        cout << "The input is an integer: " << intValue << endl;
-    } else {
-        cout << "The input is a string: " << input << endl;
-    }
+	int value;
+	while (true)
+	{
+		cout << "\nPress 1 to Enter data" << endl
+			 << endl;
+		cout << "Press 2 to Show data" << endl
+			 << endl;
+		cout << "Press 3 to Search data" << endl
+			 << endl;
+		cout << "Press 4 to Update data" << endl
+			 << endl;
+		cout << "Press 5 to Delete data" << endl
+			 << endl;
+		cout << "Press 6 to Quit" << endl
+			 << endl;
+		cin >> value;
+		switch (value)
+		{
+		case 1:
+			enter();
+			break;
+		case 2:
+			show();
+			break;
+		case 3:
+			search();
+			break;
+		case 4:
+			update();
+			break;
+		case 5:
+			Delete();
+			break;
+		case 6:
+			exit(0);
+			break;
+		default:
+			cout << "Invalid input" << endl;
+			break;
+		}
+	}
 }
