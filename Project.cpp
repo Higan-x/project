@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-string roll_no[30], name[30], Major[30], courses[30][30];
+string roll_no[30], name[30], Major[30], courses[30][30] ,crs_num[30][30],grade[30][30],sum[30];
 
 
 int total = 0;
@@ -46,10 +46,22 @@ void enter()
 			cout<<endl;
 			cout << "Enter the number of courses u want to add: " << endl;
 			cin >> course_num;
+			for (int i=0;i<50;i++,cout<<"#");
+			cout<<endl;
 			for(int j=0;j<course_num;j++)
 			{
+				cout<<j+1<<" st course :"<<endl;
+				cout<<"Enter the name of the course : ";
 				cin>>courses[i][j];
+				cout<<"Enter the quantity of this course : ";
+				cin>>crs_num[i][j];
+				cout<<"Enter the grade : ";
+				cin>>grade[i][j];
+				for (int i=0;i<50;i++,cout<<"#");
+				cout<<endl;
 			}
+			for (int i=0;i<50;i++,cout<<"#");
+			cout<<endl;
 		}
 	}
 	// else
