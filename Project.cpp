@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-string roll_no[30], name[30], Major[30], courses[30][30] ,crs_num[30][30],grade[30][30],sum[30];
-
+string roll_no[30], firstname[30] ,surname[30], Major[30], courses[30][30] ;
+float course_q[30][30],grade[30][30],sum[30],course_num[30];
 
 int total = 0;
 void enter()
@@ -10,12 +10,11 @@ void enter()
 	int st_num = 0;
 	cout << "How many students do u want to enter??" << endl;
 	cin >> st_num;
+	string roll_num;
+	int intValue;
 	if (total == 0) 
 	{
 		total = st_num + total;
-		int course_num;
-		string roll_num;
-		int intValue;
 		for (int i = 0; i < st_num; i++)
 		{
 			cout << "\nEnter the Data of student number " << i + 1 <<":"<< endl;
@@ -36,8 +35,10 @@ void enter()
 				goto flag;
 			}
 			cout<<endl;
-			cout << "Enter Name: " << endl;
-			cin >> name[i];
+			cout << "Enter FirstName: " << endl;
+			cin >> firstname[i];
+			cout << "Enter SurName: " << endl;
+			cin >> surname[i];
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 			cout << "Enter Major: " << endl;
@@ -45,16 +46,16 @@ void enter()
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 			cout << "Enter the number of courses u want to add: " << endl;
-			cin >> course_num;
+			cin >> course_num[i];
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
-			for(int j=0;j<course_num;j++)
+			for(int j=0;j<course_num[i];j++)
 			{
 				cout<<j+1<<" st course :"<<endl;
 				cout<<"Enter the name of the course : ";
 				cin>>courses[i][j];
 				cout<<"Enter the quantity of this course : ";
-				cin>>crs_num[i][j];
+				cin>>course_q[i][j];
 				cout<<"Enter the grade : ";
 				cin>>grade[i][j];
 				for (int i=0;i<50;i++,cout<<"#");
@@ -64,44 +65,85 @@ void enter()
 			cout<<endl;
 		}
 	}
-	// else
-	// {
-	// 	for (int i = total; i < ch + total; i++)
+	else
+	{
+		for (int i = total; i < st_num + total; i++)
 
-	// 	{
-	// 		cout << "\nEnter the Data of student " << i + 1 << endl
-	// 			 << endl;
-	// 		cout << "Enter Roll NO ";
-	// 		cin >> roll_no[i];
-	// 		cout << "Enter Name: ";
-	// 		cin >> name[i];
-	// 		cout << "Enter Major: ";
-	// 		cin >> Major[i];
-	// 		cout << "Enter Course: ";
-	// 		cin >> courses[i][1];
-	// 	}
-	// 	total = ch + total;
-	// }
+		{
+			cout << "\nEnter the Data of student number " << i + 1 <<":"<< endl;
+			flag2:
+			cout<<endl;
+			cout << "Enter Roll NO: " << endl;
+			cin >> roll_num;
+			stringstream s(roll_num);
+			if (s >> intValue)
+			{
+				roll_no[i] = roll_num;
+				for (int i=0;i<50;i++,cout<<"#");
+			}
+			else
+			{
+				cout<<"Please enter a number to continue"<<endl;
+				goto flag2;
+			}
+			cout<<endl;
+			cout << "Enter FirstName: " << endl;
+			cin >> firstname[i];
+			cout << "Enter SurName: " << endl;
+			cin >> surname[i];
+			for (int i=0;i<50;i++,cout<<"#");
+			cout<<endl;
+			cout << "Enter Major: " << endl;
+			cin >> Major[i];
+			for (int i=0;i<50;i++,cout<<"#");
+			cout<<endl;
+			cout << "Enter the number of courses u want to add: " << endl;
+			cin >> course_num[i];
+			for (int i=0;i<50;i++,cout<<"#");
+			cout<<endl;
+			for(int j=0;j<course_num[i];j++)
+			{
+				cout<<j+1<<" st course :"<<endl;
+				cout<<"Enter the name of the course : ";
+				cin>>courses[i][j];
+				cout<<"Enter the quantity of this course : ";
+				cin>>course_q[i][j];
+				cout<<"Enter the grade : ";
+				cin>>grade[i][j];
+				for (int i=0;i<50;i++,cout<<"#");
+				cout<<endl;
+			}
+			for (int i=0;i<50;i++,cout<<"#");
+			cout<<endl;
+		}
+		total = st_num + total;
+	}
 }
-// void show()
-// {
-// 	if (total == 0)
-// 	{
-// 		cout << "No Data is Entered" << endl;
-// 	}
-// 	else
-// 	{
-// 		for (int i = 0; i < total; i++)
-// 		{
-// 			cout << "\nData of Student " << i + 1 << endl
-// 				 << endl;
-// 			cout << "Roll NO " << roll_no[i] << endl;
-// 			cout << "Name " << name[i] << endl;
-// 			cout << "Major " << Major[i] << endl;
-// 			cout << "Course " << course[i] << endl;
-// 		}
-// 	}
-// }
+void show()
+{
+	if (total == 0)
+	{
+		cout << "No Data is Entered" << endl;
+	}
+	else
+	{
+		for (int i = 0; i < total; i++)
+		{
+			for(int k=0;k<50;k++,cout<<"-");
+			cout<<endl;
+			cout << "\nData of Student " << i + 1 <<":"<< endl<<endl;
+			cout << "Roll Number :" << roll_no[i] << endl;
+			cout << "Full Name :" << firstname[i] <<'\t'<<surname[i]<< endl;
+			cout << "Major :" << Major[i] << endl;
+			for(int j=0;j<course_num[i];j++)
+			{
+				cout<<j+1<<"st course"<<endl << "Name :"<<courses[i][j]<<'\t'<<"Quantity :"<<course_q[i][j]<<'\t'<<"Grade :"<<grade[i][j]<<endl;
+			}
+		}
+		for(int k=0;k<50;k++,cout<<"-");
+		cout<<endl;
+	}
+}
 // void search()
 // {
 // 	if (total == 0)
@@ -207,9 +249,9 @@ int main()
 		case 1:
 			enter();
 			break;
-		// case 2:
-		// 	show();
-		// 	break;
+		case 2:
+			show();
+			break;
 		// case 3:
 		// 	search();
 		// 	break;
