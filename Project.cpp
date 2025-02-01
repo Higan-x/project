@@ -5,13 +5,21 @@ string roll_no[30], firstname[30] ,surname[30], Major[30], courses[30][30] ;
 float course_q[30][30],grade[30][30],sum[30],course_num[30];
 
 int total = 0;
+
+bool numcheck(string s)
+{
+	bool b = true;
+	for (int i=0;i<s.length();i++)
+		if( s[i] != 48 || s[i] != 49 ||s[i] != 50 ||s[i] != '3' ||s[i] != '4' ||s[i] != '5' ||s[i] != '6' ||s[i] != '7' || s[i] != '8' ||s[i] != '9')
+			b = false;
+	return b;
+}
+
 void enter()
 {
 	int st_num = 0;
 	cout << "How many students do u want to enter??" << endl;
 	cin >> st_num;
-	string roll_num;
-	int intValue;
 	if (total == 0) 
 	{
 		total = st_num + total;
@@ -19,21 +27,12 @@ void enter()
 		{
 			cout << "\nEnter the Data of student number " << i + 1 <<":"<< endl;
 			for (int i=0;i<50;i++,cout<<"#");
+			string roll_num;
 			flag:
 			cout<<endl;
 			cout << "Enter Roll NO: " << endl;
-			cin >> roll_num;
-			stringstream s(roll_num);
-			if (s >> intValue)
-			{
-				roll_no[i] = roll_num;
-				for (int i=0;i<50;i++,cout<<"#");
-			}
-			else
-			{
-				cout<<"Please enter a number to continue"<<endl;
-				goto flag;
-			}
+			cin>>roll_no[i] ;
+			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 			cout << "Enter FirstName: " << endl;
 			cin >> firstname[i];
@@ -75,18 +74,7 @@ void enter()
 			flag2:
 			cout<<endl;
 			cout << "Enter Roll NO: " << endl;
-			cin >> roll_num;
-			stringstream s(roll_num);
-			if (s >> intValue)
-			{
-				roll_no[i] = roll_num;
-				for (int i=0;i<50;i++,cout<<"#");
-			}
-			else
-			{
-				cout<<"Please enter a number to continue"<<endl;
-				goto flag2;
-			}
+			cin>>roll_no[i];
 			cout<<endl;
 			cout << "Enter FirstName: " << endl;
 			cin >> firstname[i];
