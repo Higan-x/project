@@ -163,6 +163,10 @@ void show()
 			cout << "Major :" << Major[i] << endl;
 			cout << "GPA :" << avg[i]<<endl;
 			}
+			else
+			{
+				cout<<endl<<"The major not found;"<<endl;
+			}
 		}
 		for(int k=0;k<50;k++,cout<<"-");
 		cout<<endl;
@@ -182,7 +186,7 @@ void search()
 	{
 		string rollno;
 		flag3:
-		cout << "Enter the roll no of student :";
+		cout << "Enter the Roll No of student :";
 		cin >> rollno;
 		if (numcheck(rollno))
 		{
@@ -209,42 +213,56 @@ void search()
 		cout<<endl;
 	}
 }
-// void update()
-// {
-// 	if (total == 0)
-// 	{
-// 		cout << "No data is entered" << endl;
-// 	}
-// 	else
-// 	{
-// 		string rollno;
-// 		cout << "Enter the roll no of student which you want to update" << endl;
-// 		cin >> rollno;
-// 		for (int i = 0; i < total; i++)
-// 		{
-// 			if (rollno == roll_no[i])
-// 			{
-// 				cout << "\nPrevious data" << endl
-// 					 << endl;
-// 				cout << "Data of Student " << i + 1 << endl;
-// 				cout << "Roll NO: " << roll_no[i] << endl;
-// 				cout << "Name " << name[i] << endl;
-// 				cout << "Major " << Major[i] << endl;
-// 				cout << "Course " << course[i] << endl;
-// 				cout << "\nEnter new data" << endl << endl;
-// 				cout << "Enter Roll NO ";
-// 				cin >> roll_no[i];
-// 				cout << "Enter Name: ";
-// 				cin >> name[i];
-// 				cout << "Enter Major: ";
-// 				cin >> Major[i];
-// 				cout << "Enter Course: ";
-// 				cin >> course[i];
-// 				cout << "Enter Mobile NO: ";
-// 			}
-// 		}
-// 	}
-// }
+void update()
+{
+	if (total == 0)
+	{
+		for(int k=0;k<50;k++,cout<<"-");
+		cout<<endl;
+		cout << "No data is entered" << endl;
+		for(int k=0;k<50;k++,cout<<"-");
+		cout<<endl;
+	}
+	else
+	{
+		string rollno;
+		cout << "Enter the roll no of student which you want to update : " << endl;
+		cin >> rollno;
+		for (int i = 0; i < total; i++)
+		{
+			if (rollno == roll_no[i])
+			{
+				int value;
+				cout<<"Which part you want to update? (1 ---> Name , 2 ---> Major , 3 ---> Courses )"<<endl;
+				cin>>value;
+				switch(value)
+				{
+					case 1:
+					cout<<"Enter the Name :"<< endl <<"First Name :";
+					cin>>firstname[i];
+					cout<<"SurName :";
+					cin>>surname[i];
+					break;
+					case 2:
+					break;
+					case 3:
+					break;
+					default:
+					for(int k=0;k<50;k++,cout<<"-");
+					cout<<endl;
+					cout << "Invalid input" << endl;
+					for(int k=0;k<50;k++,cout<<"-");
+					cout<<endl;
+					break;
+				}
+			}
+			else
+			{
+				cout<<"Student not found"<<endl;
+			}
+		}
+	}
+}
 // void Delete()
 // {
 // 	if (total == 0)
@@ -268,6 +286,10 @@ void search()
 // 		}
 // 	}
 // }
+// void report()
+// {
+
+// }
 int main()
 {
 	int value;
@@ -283,7 +305,9 @@ int main()
 			 << endl;
 		cout << "Press 5 to Delete data" << endl
 			 << endl;
-		cout << "Press 6 to Quit" << endl
+		cout << "Press 6 to show the report" << endl
+			 << endl;
+		cout << "Press 7 to Quit" << endl
 			 << endl;
 		cin >> value;
 		switch (value)
@@ -297,13 +321,16 @@ int main()
 		case 3:
 			search();
 			break;
-		// case 4:
-		// 	update();
-		// 	break;
+		case 4:
+			update();
+			break;
 		// case 5:
 		// 	Delete();
 		// 	break;
-		case 6:
+		// case 6:
+		// 	report();
+		// 	break;
+		case 7:
 			exit(0);
 			break;
 		default:
