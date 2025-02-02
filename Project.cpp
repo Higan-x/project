@@ -16,7 +16,6 @@ bool numcheck(string s)
     }
     return b;
 }
-
 void enter()
 {
 	int st_num = 0;
@@ -30,9 +29,10 @@ void enter()
 			cout << "\nEnter the Data of student number " << i + 1 <<":"<< endl;
 			for (int i=0;i<50;i++,cout<<"#");
 			string roll_num;
+			string g,qu,cn;
 			flag:
 			cout<<endl;
-			cout << "Enter Roll NO: " << endl;
+			cout << "Enter StudentID: " << endl;
 			cin>>roll_num;
 			if (numcheck(roll_num))
 				roll_no[i] = roll_num;
@@ -87,7 +87,7 @@ void enter()
 			flag2:
 			string roll_num;
 			cout<<endl;
-			cout << "Enter Roll NO: " << endl;
+			cout << "Enter StudentID: " << endl;
 			cin>>roll_num;
 			if (numcheck(roll_num))
 				roll_no[i] = roll_num;
@@ -144,6 +144,8 @@ void show()
 	}
 	else
 	{
+		int list[30] = {-1};
+		int count =0;
 		string major;
 		bool b=false;
 		cout<<'(';
@@ -159,11 +161,51 @@ void show()
 			if(Major[i] == major)
 			{
 				b=true;
+				list[count] = i;
+				count++;
 			}
 			else
 				cout<<endl<<"The major not found;"<<endl;
 		}
-		for(int k=0;k<50;k++,cout<<"-");
+		if (b)
+		{
+			int m, j, temp, t1, t2;
+			for (m = 0; m < count; m++)
+			{
+				for (j = 0; j < count - m - 1; j++)
+				{
+					t1 = list[j];
+					t2 = list[j + 1];
+					if (avg[t1] < avg[t2])
+					{
+						temp = list[j];
+						list[j] = list[j + 1];
+						list[j + 1] = temp;
+					}
+				}
+			}
+		}
+		for(int i=0;i<count;i++)
+		{
+			int temp=list[i];
+			cout<<i+1<<"st student: "<<endl;
+			cout<<"Full Name :"<<'\t'<<firstname[temp]<<'\t'<<surname[temp]<<endl;
+			cout<<"StudentID :"<<'\t'<<roll_no[temp]<<endl;
+			cout<<"Courses :"<<endl;
+			for(int k=0;k<30;k++,cout<<"-");
+			cout<<endl;
+			for(int j=0;j<course_num[temp];j++)
+			{
+				cout<<j+1<<" course :"<<endl;
+				cout<<"Name :"<<'\t'<<courses[temp][j]<<endl;
+				cout<<"Unit :"<<'\t'<<course_q[temp][j]<<endl;
+				cout<<"grade :"<<'\t'<<grade[temp][j]<<endl;
+			}
+			cout<<"GPA :"<<'\t'<<avg[temp]<<endl;
+			for(int k=0;k<50;k++,cout<<"-");
+			cout<<endl;
+		}
+		for(int k=0;k<50;k++,cout<<"#");
 		cout<<endl;
 	}
 }
@@ -181,7 +223,7 @@ void search()
 	{
 		string rollno;
 		flag3:
-		cout << "Enter the Roll No of student :";
+		cout << "Enter the StudentID of student :";
 		cin >> rollno;
 		if (numcheck(rollno))
 		{
@@ -191,7 +233,7 @@ void search()
 				{
 					cout<<"Student found :"<<endl;
 					cout << "Full Name :" << firstname[i] <<'\t'<<surname[i]<< endl;
-					cout << "Roll Number :" << roll_no[i] << endl;
+					cout << "StudentID :" << roll_no[i] << endl;
 					cout << "Major :" << Major[i] << endl;
 					cout << "GPA :" <<avg[i] <<endl;
 				}
@@ -221,7 +263,7 @@ void update()
 	else
 	{
 		string rollno;
-		cout << "Enter the roll no of student which you want to update : " << endl;
+		cout << "Enter the StudentID of student which you want to update : " << endl;
 		cin >> rollno;
 		for (int i = 0; i < total; i++)
 		{
@@ -324,7 +366,7 @@ void report()
 	{
 		string rollno;
 		flag4:
-		cout << "Enter the Roll No of student :";
+		cout << "Enter the StudentID of student :";
 		cin >> rollno;
 		if (numcheck(rollno))
 		{
@@ -334,7 +376,7 @@ void report()
 				{
 					cout<<"Student found :"<<endl;
 					cout << "Full Name :" << firstname[i] <<'\t'<<surname[i]<< endl;
-					cout << "Roll Number :" << roll_no[i] << endl;
+					cout << "StudentID :" << roll_no[i] << endl;
 					cout << "Major :" << Major[i] << endl <<"Courses :" <<endl;
 					for(int j=0; j<course_num[i];j++)
 						cout<<"Name :"<<courses[i][j]<<endl<<"Quantity :"<<course_q[i][j]<<endl<<"Grade :"<<grade[i][j]<<endl;
