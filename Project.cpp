@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-string roll_no[30], firstname[30] ,surname[30], Major[30], courses[30][30] ;
-float course_q[30][30],grade[30][30],avg[30],q[30],course_num[30],sum[30];
+string firstname[30] ,surname[30], Major[30], courses[30][30];
+float roll_no[30]={0} ,course_q[30][30],grade[30][30],avg[30],q[30],course_num[30],sum[30];
 
 int total = 0;
 bool numcheck(string s)
@@ -84,18 +84,21 @@ void enter()
 		{
 			cout << "\nEnter the Data of student number " << i + 1 <<":"<< endl;
 			for (int i=0;i<50;i++,cout<<"#");
-			string roll_num;
 			string t;
 			flag:
 			cout<<endl;
 			cout << "Enter StudentID: " << endl;
+			string roll_num;
 			cin>>roll_num;
 			if (numcheck(roll_num))
 			{
-				for(int k=0;k<30;k++)
+				for(int k=0;k<total;k++)
 				{
-					if (roll_no[k] != roll_num)
-						roll_no[i] = roll_num;
+					if (roll_no[k] != stn(roll_num))
+					{
+						roll_no[i] = stn(roll_num);
+						break;
+					}
 					else{
 						cout<<"This Student Id is already taken";
 						goto flag;
@@ -139,7 +142,7 @@ void enter()
 				cout<<"Enter the name of the course : ";
 				cin>>courses[i][j];
 				f6:
-				cout<<"Enter the quantity of this course (number): ";
+				cout<<"Enter the unit of this course (number): ";
 				cin>>t;
 				if (numcheck(t))
 				{
@@ -187,7 +190,7 @@ void enter()
 			cout << "Enter StudentID: " << endl;
 			cin>>roll_num;
 			if (numcheck(roll_num))
-				roll_no[i] = roll_num;
+				roll_no[i] = stn(roll_num);
 			else
 			{
 				cout<<"Please enter a number to continue"<<endl;
@@ -204,7 +207,6 @@ void enter()
 			cin >> Major[i];
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
-			cout << "Enter the number of courses u want to add: " << endl;
 			f8:
 			cout << "Enter the number of courses u want to add: " << endl;
 			cin >> t;
@@ -225,7 +227,7 @@ void enter()
 				cout<<"Enter the name of the course : ";
 				cin>>courses[i][j];
 				f9:
-				cout<<"Enter the quantity of this course (number): ";
+				cout<<"Enter the unit of this course (number): ";
 				if (numcheck(t))
 				{
 					course_q[i][j] = stn(t);
@@ -270,7 +272,7 @@ void show()
 	}
 	else
 	{
-		int list[30] = {-1};
+		int list[30];
 		int count =0;
 		string major;
 		bool b=false;
@@ -290,8 +292,6 @@ void show()
 				list[count] = i;
 				count++;
 			}
-			else
-				cout<<endl<<"The major not found;"<<endl;
 		}
 		if (b)
 		{
@@ -310,6 +310,10 @@ void show()
 					}
 				}
 			}
+		}
+		else
+		{
+			cout<<"Major not found"<<endl;
 		}
 		for(int i=0;i<count;i++)
 		{
@@ -355,7 +359,7 @@ void search()
 		{
 			for(int i=0;i<total;i++)
 			{
-				if(roll_no[i] == rollno)
+				if(roll_no[i] == stn(rollno))
 				{
 					cout<<"Student found :"<<endl;
 					cout << "Full Name :" << firstname[i] <<'\t'<<surname[i]<< endl;
@@ -397,7 +401,7 @@ void update()
 		{
 			for (int i = 0; i < total; i++)
 			{
-				if (rollno == roll_no[i])
+				if (stn(rollno) == roll_no[i])
 				{
 					int value;
 					string t;
@@ -506,7 +510,7 @@ void Delete()
 		}
 		else
 		{
-			cout << "Please Press 1 to Delete All Record" << endl;
+			cout << "Delete process failed" << endl;
 		}
 	}
 }
@@ -530,7 +534,7 @@ void report()
 		{
 			for(int i=0;i<total;i++)
 			{
-				if(roll_no[i] == rollno)
+				if(roll_no[i] == stn(rollno))
 				{
 					cout<<"Student found :"<<endl;
 					cout << "Full Name :" << firstname[i] <<'\t'<<surname[i]<< endl;
