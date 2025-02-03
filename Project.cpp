@@ -2,7 +2,6 @@
 
 using namespace std;
 string roll_no[30], firstname[30] ,surname[30], Major[30], courses[30][30] ;
-string course_qc[30][30],gradec[30][30];
 float course_q[30][30],grade[30][30],avg[30],q[30],course_num[30],sum[30];
 
 int total = 0;
