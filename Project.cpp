@@ -91,7 +91,17 @@ void enter()
 			cout << "Enter StudentID: " << endl;
 			cin>>roll_num;
 			if (numcheck(roll_num))
-				roll_no[i] = roll_num;
+			{
+				for(int k=0;k<30;k++)
+				{
+					if (roll_no[k] != roll_num)
+						roll_no[i] = roll_num;
+					else{
+						cout<<"This Student Id is already taken";
+						goto flag;
+					}
+				}
+			}
 			else
 			{
 				cout<<"Please enter a number to continue"<<endl;
@@ -365,7 +375,7 @@ void search()
 	}
 }
 void update()
-{ 
+{
 	if (total == 0)
 	{
 		for(int k=0;k<50;k++,cout<<"-");
