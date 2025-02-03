@@ -85,7 +85,7 @@ void enter()
 			cout << "\nEnter the Data of student number " << i + 1 <<":"<< endl;
 			for (int i=0;i<50;i++,cout<<"#");
 			string roll_num;
-			string g,qu,cn;
+			string t;
 			flag:
 			cout<<endl;
 			cout << "Enter StudentID: " << endl;
@@ -111,10 +111,10 @@ void enter()
 			cout<<endl;
 			f5:
 			cout << "Enter the number of courses u want to add: " << endl;
-			cin >> cn;
-			if(numcheck(cn))
+			cin >> t;
+			if(numcheck(t))
 			{
-				course_num[i] = stn(cn);
+				course_num[i] = stn(t);
 			}
 			else
 			{
@@ -130,9 +130,9 @@ void enter()
 				cin>>courses[i][j];
 				f6:
 				cout<<"Enter the quantity of this course (number): ";
-				if (numcheck(cn))
+				if (numcheck(t))
 				{
-					course_q[i][j] = stn(cn);
+					course_q[i][j] = stn(t);
 				}
 				else
 				{
@@ -141,9 +141,9 @@ void enter()
 				}
 				f7:
 				cout<<"Enter the grade (more than 0 and less than 21): ";
-				if (numcheck(cn))
+				if (numcheck(t))
 				{
-					grade[i][j] = stn(cn);
+					grade[i][j] = stn(t);
 				}
 				else
 				{
@@ -170,6 +170,7 @@ void enter()
 			for (int i=0;i<50;i++,cout<<"#");
 			flag2:
 			string roll_num;
+			string t;
 			cout<<endl;
 			cout << "Enter StudentID: " << endl;
 			cin>>roll_num;
@@ -192,7 +193,18 @@ void enter()
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 			cout << "Enter the number of courses u want to add: " << endl;
-			cin >> course_num[i];
+			f8:
+			cout << "Enter the number of courses u want to add: " << endl;
+			cin >> t;
+			if(numcheck(t))
+			{
+				course_num[i] = stn(t);
+			}
+			else
+			{
+				cout<<"Please enter a number to continue"<<endl;
+				goto f8;
+			}
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 			for(int j=0;j<course_num[i];j++)
@@ -200,10 +212,28 @@ void enter()
 				cout<<j+1<<" st course :"<<endl;
 				cout<<"Enter the name of the course : ";
 				cin>>courses[i][j];
+				f9:
 				cout<<"Enter the quantity of this course (number): ";
-				cin>>course_q[i][j];
-				cout<<"Enter the grade (more than 0 and less than 21) : ";
-				cin>>grade[i][j];
+				if (numcheck(t))
+				{
+					course_q[i][j] = stn(t);
+				}
+				else
+				{
+					cout << "Please enter a number to continue" << endl;
+					goto f9;
+				}
+				f10:
+				cout<<"Enter the grade (more than 0 and less than 21): ";
+				if (numcheck(t))
+				{
+					grade[i][j] = stn(t);
+				}
+				else
+				{
+					cout << "Please enter a number to continue" << endl;
+					goto f10;
+				}
 				sum[i]+=course_q[i][j] * grade[i][j];
 				q[i]+=course_q[i][j];
 				for (int i=0;i<50;i++,cout<<"#");
@@ -347,95 +377,125 @@ void update()
 	else
 	{
 		string rollno;
+		string s;
+		f13:
 		cout << "Enter the StudentID of student which you want to update : " << endl;
 		cin >> rollno;
-		for (int i = 0; i < total; i++)
+		if(numcheck(rollno))
 		{
-			if (rollno == roll_no[i])
+			for (int i = 0; i < total; i++)
 			{
-				int value;
-				string s;
-				cout<<"Which part you want to update? (1 ---> Name , 2 ---> Major , 3 ---> Courses )"<<endl;
-				cin>>value;
-				switch(value)
+				if (rollno == roll_no[i])
 				{
+					int value;
+					string t;
+					cout << "Which part you want to update? (1 ---> Name , 2 ---> Major , 3 ---> Courses )" << endl;
+					cin >> value;
+					switch (value)
+					{
 					case 1:
-					cout<<"Enter the Name :"<< endl <<"First Name :";
-					cin>>firstname[i];
-					cout<<"SurName :";
-					cin>>surname[i];
-					cout<<"Updated succesfully"<<endl;
-					break;
+						cout << "Enter the Name :" << endl
+							 << "First Name :";
+						cin >> firstname[i];
+						cout << "SurName :";
+						cin >> surname[i];
+						cout << "Updated succesfully" << endl;
+						break;
 					case 2:
-					cout<<"Enter the Major :"<<endl;
-					cin>>Major[i];
-					cout<<"Updated succesfully"<<endl;
-					break;
+						cout << "Enter the Major :" << endl;
+						cin >> Major[i];
+						cout << "Updated succesfully" << endl;
+						break;
 					case 3:
-					for(int j=0;j<course_num[i];j++)
-						cout<<courses[i][j]<<'\t';
-					cout<<"Type the course u want to change: " <<endl;
-					cin>>s;
-					sum[i] =0;
-					q[i] =0;
-					for(int k=0;k<course_num[i];k++)
+						for (int j = 0; j < course_num[i]; j++)
+							cout << courses[i][j] << '\t';
+						cout << "Type the course u want to change: " << endl;
+						cin >> s;
+						sum[i] = 0;
+						q[i] = 0;
+						for (int k = 0; k < course_num[i]; k++)
 						{
-							if(s == courses[i][k])
+							if (s == courses[i][k])
 							{
-								cout<<"Enter the name of the course : ";
-								cin>>courses[i][k];
-								cout<<"Enter the quantity of this course (number): ";
-								cin>>course_q[i][k];
-								cout<<"Enter the grade (more than 0 and less than 21): ";
-								cin>>grade[i][k];
+								cout << "Enter the name of the course : ";
+								cin >> courses[i][k];
+							f12:
+								cout << "Enter the units: ";
+								if (numcheck(t))
+								{
+									course_q[i][k] = stn(t);
+								}
+								else
+								{
+									cout << "Please enter a number to continue" << endl;
+									goto f12;
+								}
+							f11:
+								cout << "Enter the grade (more than 0 and less than 21): ";
+								if (numcheck(t))
+								{
+									grade[i][k] = stn(t);
+								}
+								else
+								{
+									cout << "Please enter a number to continue" << endl;
+									goto f11;
+								}
 							}
 							else
-								cout<<"Course not found"<<endl;
-							sum[i]+=course_q[i][k] * grade[i][k];
-							q[i]+=course_q[i][k];
+								cout << "Course not found" << endl;
+							sum[i] += course_q[i][k] * grade[i][k];
+							q[i] += course_q[i][k];
 						}
-					avg[i] = sum[i] / q[i];
-					cout<<"Updated succesfully"<<endl;
-					break;
+						avg[i] = sum[i] / q[i];
+						cout << "Updated succesfully" << endl;
+						break;
 					default:
-					for(int k=0;k<50;k++,cout<<"-");
-					cout<<endl;
-					cout << "Invalid input" << endl;
-					for(int k=0;k<50;k++,cout<<"-");
-					cout<<endl;
-					break;
+						for (int k = 0; k < 50; k++, cout << "-")
+							;
+						cout << endl;
+						cout << "Invalid input" << endl;
+						for (int k = 0; k < 50; k++, cout << "-")
+							;
+						cout << endl;
+						break;
+					}
+				}
+				else
+				{
+					cout << "Student not found" << endl;
 				}
 			}
-			else
-			{
-				cout<<"Student not found"<<endl;
-			}
+		}
+		else{
+			cout << "Please enter a number to continue" << endl;
+			goto f13;
 		}
 	}
 }
-// void Delete()
-// {
-// 	if (total == 0)
-// 	{
-// 		cout << "No data is entered yet" << endl;
-// 	}
-// 	else
-// 	{
-// 		int a;
-// 		cout << "Are you Sure to Delete Data?" << endl;
-// 		cout << "Press 1 to delete all record" << endl;
-// 		cin >> a;
-// 		if (a == 1)
-// 		{
-// 			total = 0;
-// 			cout << "All record is deleted..!!" << endl;
-// 		}
-// 		else
-// 		{
-// 			cout << "Please Press 1 to Delete All Record" << endl;
-// 		}
-// 	}
-// }
+void Delete()
+{
+	if (total == 0)
+	{
+		cout << "No data is entered yet" << endl;
+	}
+	else
+	{
+		int a;
+		cout << "Are you Sure to Delete Data?" << endl;
+		cout << "Press 1 to delete all record" << endl;
+		cin >> a;
+		if (a == 1)
+		{
+			total = 0;
+			cout << "All record is deleted..!!" << endl;
+		}
+		else
+		{
+			cout << "Please Press 1 to Delete All Record" << endl;
+		}
+	}
+}
 void report()
 {
 	if (total == 0)
@@ -492,7 +552,7 @@ int main()
 			 << endl;
 		cout << "Press 4 to Update data" << endl
 			 << endl;
-		cout << "Press 5 to Delete data" << endl
+		cout << "Press 5 to Delete all the data" << endl
 			 << endl;
 		cout << "Press 6 to show the report" << endl
 			 << endl;
@@ -513,9 +573,9 @@ int main()
 		case 4:
 			update();
 			break;
-		// case 5:
-		// 	Delete();
-		// 	break;
+		case 5:
+			Delete();
+			break;
 		case 6:
 			report();
 			break;
