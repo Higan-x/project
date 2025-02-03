@@ -365,7 +365,7 @@ void search()
 	}
 }
 void update()
-{
+{ 
 	if (total == 0)
 	{
 		for(int k=0;k<50;k++,cout<<"-");
