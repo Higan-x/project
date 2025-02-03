@@ -15,6 +15,63 @@ bool numcheck(string s)
     }
     return b;
 }
+int stn(string s)
+{
+	int n=0;
+	for (char ch:s)
+	{
+		if (ch =='0')
+		{
+			n*=10;
+			n+=0;
+		}
+		if (ch =='1')
+		{
+			n*=10;
+			n+=1;
+		}
+		if (ch =='2')
+		{
+			n*=10;
+			n+=2;
+		}
+		if (ch =='3')
+		{
+			n*=10;
+			n+=3;
+		}
+		if (ch =='4')
+		{
+			n*=10;
+			n+=4;
+		}
+		if (ch =='5')
+		{
+			n*=10;
+			n+=5;
+		}
+		if (ch =='6')
+		{
+			n*=10;
+			n+=6;
+		}
+		if (ch =='7')
+		{
+			n*=10;
+			n+=7;
+		}
+		if (ch =='8')
+		{
+			n*=10;
+			n+=8;
+		}if (ch =='9')
+		{
+			n*=10;
+			n+=9;
+		}
+	}
+	return n;
+}
 void enter()
 {
 	int st_num = 0;
@@ -52,8 +109,18 @@ void enter()
 			cin >> Major[i];
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
+			f5:
 			cout << "Enter the number of courses u want to add: " << endl;
-			cin >> course_num[i];
+			cin >> cn;
+			if(numcheck(cn))
+			{
+				course_num[i] = stn(cn);
+			}
+			else
+			{
+				cout<<"Please enter a number to continue"<<endl;
+				goto f5;
+			}
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 			for(int j=0;j<course_num[i];j++)
@@ -61,10 +128,28 @@ void enter()
 				cout<<j+1<<" st course :"<<endl;
 				cout<<"Enter the name of the course : ";
 				cin>>courses[i][j];
+				f6:
 				cout<<"Enter the quantity of this course (number): ";
-				cin>>course_q[i][j];
+				if (numcheck(cn))
+				{
+					course_q[i][j] = stn(cn);
+				}
+				else
+				{
+					cout << "Please enter a number to continue" << endl;
+					goto f6;
+				}
+				f7:
 				cout<<"Enter the grade (more than 0 and less than 21): ";
-				cin>>grade[i][j];
+				if (numcheck(cn))
+				{
+					grade[i][j] = stn(cn);
+				}
+				else
+				{
+					cout << "Please enter a number to continue" << endl;
+					goto f7;
+				}
 				sum[i]+=course_q[i][j] * grade[i][j];
 				q[i]+=course_q[i][j];
 				for (int i=0;i<50;i++,cout<<"#");
