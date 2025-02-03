@@ -80,7 +80,7 @@ void enter()
 	if (total == 0) 
 	{
 		total = st_num + total;
-		for (int i = 0; i < st_num; i++)
+		for (int i = 0; i < total; i++)
 		{
 			cout << "\nEnter the Data of student number " << i + 1 <<":"<< endl;
 			for (int i=0;i<50;i++,cout<<"#");
