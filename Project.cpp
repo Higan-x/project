@@ -140,6 +140,7 @@ void enter()
 				cin>>courses[i][j];
 				f6:
 				cout<<"Enter the quantity of this course (number): ";
+				cin>>t;
 				if (numcheck(t))
 				{
 					course_q[i][j] = stn(t);
@@ -151,6 +152,7 @@ void enter()
 				}
 				f7:
 				cout<<"Enter the grade (more than 0 and less than 21): ";
+				cin>>t;
 				if (numcheck(t))
 				{
 					grade[i][j] = stn(t);
@@ -431,6 +433,7 @@ void update()
 								cin >> courses[i][k];
 							f12:
 								cout << "Enter the units: ";
+								cin>>t;
 								if (numcheck(t))
 								{
 									course_q[i][k] = stn(t);
@@ -442,6 +445,7 @@ void update()
 								}
 							f11:
 								cout << "Enter the grade (more than 0 and less than 21): ";
+								cin>>t;
 								if (numcheck(t))
 								{
 									grade[i][k] = stn(t);
