@@ -86,6 +86,7 @@ void enter()
 			for (int i=0;i<50;i++,cout<<"#");
 			string t;
 			flag:
+			bool check=true;
 			cout<<endl;
 			cout << "Enter StudentID: " << endl;
 			string roll_num;
@@ -94,20 +95,21 @@ void enter()
 			{
 				for(int k=0;k<=i;k++)
 				{
-					if (roll_no[k] != stn(roll_num))
+					if (roll_no[k] == stn(roll_num))
 					{
-						roll_no[i] = stn(roll_num);
-						break;
-					}
-					else{
-						cout<<"This Student Id is already taken";
-						goto flag;
+						check = false;
 					}
 				}
 			}
 			else
 			{
 				cout<<"Please enter a number to continue"<<endl;
+				goto flag;
+			}
+			if(check)
+				roll_no[i] = stn(roll_num);
+			else{
+				cout<<"This Student id is already taken";
 				goto flag;
 			}
 			for (int i=0;i<50;i++,cout<<"#");
@@ -184,16 +186,27 @@ void enter()
 			cout << "\nEnter the Data of student number " << i + 1 <<":"<< endl;
 			for (int i=0;i<50;i++,cout<<"#");
 			flag2:
+			bool check=true;
 			string roll_num;
 			string t;
 			cout<<endl;
 			cout << "Enter StudentID: " << endl;
 			cin>>roll_num;
 			if (numcheck(roll_num))
-				roll_no[i] = stn(roll_num);
+				for(int k=0;k<=i;k++)
+				{
+					if(roll_no[k] == stn(roll_num))
+						check = false;
+				}
 			else
 			{
 				cout<<"Please enter a number to continue"<<endl;
+				goto flag2;
+			}
+			if(check)
+				roll_no[i] = stn(roll_num);
+			else{
+				cout<<"This Student id is already taken";
 				goto flag2;
 			}
 			cout<<endl;
