@@ -209,6 +209,7 @@ void enter()
 				cout<<"This Student id is already taken";
 				goto flag2;
 			}
+			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 			cout << "Enter FirstName: " << endl;
 			cin >> firstname[i];
