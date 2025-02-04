@@ -3,6 +3,7 @@
 using namespace std;
 string firstname[30] ,surname[30], Major[30], courses[30][30];
 float roll_no[30]={0} ,course_q[30][30],grade[30][30],avg[30],q[30],course_num[30],sum[30];
+vector <string> ml;
 
 int total = 0;
 bool numcheck(string s)
@@ -72,6 +73,24 @@ int stn(string s)
 	}
 	return n;
 }
+vector<string> removeDuplicates(const vector<string> &input) {
+    vector<string> result;
+    
+    for (const string &str : input) {
+        bool isDuplicate = false;
+        for (const string &resStr : result) {
+            if (str == resStr) {
+                isDuplicate = true;
+                break;
+            }
+        }
+        if (!isDuplicate) {
+            result.push_back(str);
+        }
+    }
+    
+    return result;
+}
 void enter()
 {
 	int st_num = 0;
@@ -87,6 +106,7 @@ void enter()
 			string t;
 			flag:
 			bool check=true;
+			bool mcheck=true;
 			cout<<endl;
 			cout << "Enter StudentID: " << endl;
 			string roll_num;
@@ -122,6 +142,7 @@ void enter()
 			cout<<endl;
 			cout << "Enter Major: " << endl;
 			cin >> Major[i];
+			ml.push_back(Major[i]);
 			for (int i=0;i<50;i++,cout<<"#");
 			cout<<endl;
 			f5:
@@ -286,21 +307,13 @@ void show()
 	}
 	else
 	{
+		vector <string> mlr=removeDuplicates(ml);
 		int list[30];
 		int count =0;
 		string major;
-		vector <string> ml;
 		bool b=false;
-		for(int i=0;i<total;i++)
-			{
-				if(major != Major[i])
-				{
-					ml.push_back(Major[i]);
-					break;
-				}
-			}
 		cout<<'(';
-		for(string i:ml)
+		for(string i:mlr)
 			cout<<i<<" ";
 		cout<<'\b'<<')';
 		cout<<endl;
@@ -308,7 +321,6 @@ void show()
 		cin>>major;
 		for (int i = 0; i < total; i++)
 		{
-			for(int k=0;k<50;k++,cout<<"-");
 			if(Major[i] == major)
 			{
 				b=true;
@@ -343,6 +355,7 @@ void show()
 			int temp=list[i];
 			cout<<i+1<<"st student: "<<endl;
 			cout<<"Full Name :"<<'\t'<<firstname[temp]<<'\t'<<surname[temp]<<endl;
+			cout<<"Major :"<<'\t'<<Major[temp]<<endl;
 			cout<<"StudentID :"<<'\t'<<roll_no[temp]<<endl;
 			cout<<"Courses :"<<endl;
 			for(int k=0;k<30;k++,cout<<"-");
@@ -389,6 +402,7 @@ void search()
 					cout << "StudentID :" << roll_no[i] << endl;
 					cout << "Major :" << Major[i] << endl;
 					cout << "GPA :" <<avg[i] <<endl;
+					break;
 				}
 				else
 					cout<<"Student not found" <<endl;
