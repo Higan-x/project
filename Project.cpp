@@ -92,7 +92,7 @@ void enter()
 			cin>>roll_num;
 			if (numcheck(roll_num))
 			{
-				for(int k=0;k<total;k++)
+				for(int k=0;k<=i;k++)
 				{
 					if (roll_no[k] != stn(roll_num))
 					{
@@ -275,11 +275,20 @@ void show()
 		int list[30];
 		int count =0;
 		string major;
+		vector <string> ml;
 		bool b=false;
-		cout<<'(';
 		for(int i=0;i<total;i++)
-			cout<<Major[i]<<'\t';
-		cout<<')';
+			{
+				if(major != Major[i])
+				{
+					ml.push_back(Major[i]);
+					break;
+				}
+			}
+		cout<<'(';
+		for(string i:ml)
+			cout<<i<<" ";
+		cout<<'\b'<<')';
 		cout<<endl;
 		cout<<"type which Major u want to list:"<<endl;
 		cin>>major;
